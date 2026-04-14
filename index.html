@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>EV Charging Monitor</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --bg: #eaf4ff;
+  --card: #ffffff;
+  --text: #000;
+}
+
+.dark {
+  --bg: #1e2a38;
+  --card: #2c3e50;
+  --text: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial;
+  margin: 0;
+  padding: 20px;
+}
+
+.container { max-width: 1100px; margin:auto; }
+
+.card {
+  background: var(--card);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.dashboard {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.big { font-size:30px; }
+
+.normal { color:green; }
+.warning { color:orange; }
+.danger { color:red; animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%{opacity:1;} 50%{opacity:0.5;} 100%{opacity:1;}
+}
+
+button { margin:5px; padding:10px; cursor:pointer; }
+
+.chart-container {
+  height:300px;
+}
+
+footer {
+  text-align:center;
+  margin-top:20px;
+  opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>🔌 Зарядна станція</h1>
+<p>Час: <span id="time"></span></p>
+</header>
+
+<main>
+
+<section>
+<button onclick="update()">Оновити</button>
+<button onclick="toggleAuto()">Авто</button>
+<button onclick="stopAuto()">Зупинити</button>
+<button onclick="toggleTheme()">🌙 Тема</button>
+</section>
+
+<section class="dashboard">
+
+<div class="card">
+Потужність
+<div id="p0" class="big"></div>
+<div id="s0">●</div>
+</div>
+
+<div class="card">
+Напруга
+<div id="p1" class="big"></div>
+<div id="s1">●</div>
+</div>
+
+<div class="card">
+Струм
+<div id="p2" class="big"></div>
+<div id="s2">●</div>
+</div>
+
+<div class="card">
+Заряд %
+<div id="p3" class="big"></div>
+<div id="s3">●</div>
+</div>
+
+<div class="card">
+Стан роз'єму
+<div id="connector" class="big"></div>
+</div>
+
+<div class="card">
+Зарядок/день
+<div id="sessions" class="big"></div>
+</div>
+
+<div class="card">
+Енергія
+<div id="energy" class="big"></div>
+<div>кВт·год</div>
+</div>
+
+</section>
+
+<section class="card chart-container">
+<canvas id="chart"></canvas>
+</section>
+
+</main>
+
+<footer>
+<p>Моніторинг EV</p>
+</footer>
+
+</div>
+
+<audio id="alarm">
+<source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg">
+</audio>
+
+<script>
+
+let auto=false, interval;
+
+const params=[
+{min:0,max:150,normal:[20,120]},
+{min:200,max:800,normal:[350,450]},
+{min:0,max:200,normal:[50,150]},
+{min:0,max:100,normal:[20,95]}
+];
+
+let history = JSON.parse(localStorage.getItem("history")) || {
+labels:[],
+data:[]
+};
+
+const ctx=document.getElementById("chart").getContext("2d");
+
+const chart=new Chart(ctx,{
+type:"line",
+data:{
+labels:history.labels,
+datasets:[{
+label:"Потужність",
+data:history.data,
+tension:0.2,
+borderColor:"#3498db"
+}]
+},
+options:{
+plugins:{
+legend:{
+labels:{ color:"#000" }
+}
+},
+scales:{
+x:{ ticks:{ color:"#000" } },
+y:{ ticks:{ color:"#000" } }
+}
+}
+});
+
+function rand(min,max){
+return (Math.random()*(max-min)+min).toFixed(1);
+}
+
+function getStatus(v,p){
+v=parseFloat(v);
+if(v>=p.normal[0] && v<=p.normal[1]) return "normal";
+if(v>=p.min && v<=p.max) return "warning";
+return "danger";
+}
+
+function update(){
+
+let critical=false;
+
+params.forEach((p,i)=>{
+let val=rand(p.min,p.max);
+document.getElementById("p"+i).textContent=val;
+
+let st=getStatus(val,p);
+let el=document.getElementById("s"+i);
+el.className=st;
+el.textContent="●";
+
+if(st==="danger") critical=true;
+
+if(i===0){
+let time=new Date().toLocaleTimeString();
+history.labels.push(time);
+history.data.push(val);
+
+if(history.labels.length>20){
+history.labels.shift();
+history.data.shift();
+}
+
+chart.update();
+localStorage.setItem("history",JSON.stringify(history));
+}
+
+});
+
+document.getElementById("connector").textContent =
+Math.random()>0.2 ? "Підключено" : "Відключено";
+
+document.getElementById("sessions").textContent =
+Math.floor(Math.random()*50);
+
+document.getElementById("energy").textContent =
+(Math.random()*500).toFixed(1);
+
+if(critical){
+document.getElementById("alarm").play();
+}
+
+document.getElementById("time").textContent =
+new Date().toLocaleTimeString();
+}
+
+function toggleAuto(){
+if(!auto){
+interval=setInterval(update,3000);
+auto=true;
+}else{
+clearInterval(interval);
+auto=false;
+}
+}
+
+function stopAuto(){
+clearInterval(interval);
+auto=false;
+}
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+
+let isDark=document.body.classList.contains("dark");
+let color=isDark?"#ffffff":"#000000";
+
+chart.options.plugins.legend.labels.color=color;
+chart.options.scales.x.ticks.color=color;
+chart.options.scales.y.ticks.color=color;
+
+chart.update();
+}
+
+update();
+
+</script>
+
+</body>
+</html>
