@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Комерційний облік</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>⚡ Реєстр точок комерційного обліку</h1>
+    </header>
+
+    <main>
+        <section class="section-container form-bg">
+            <div class="content-wrapper">
+                <h2>Додати нову точку</h2>
+                <form id="form">
+                    <div class="form-group">
+                        <label for="number">Номер точки обліку *</label>
+                        <input type="text" id="number" name="number" placeholder="Наприклад: 10245" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="object">Назва об'єкта *</label>
+                        <input type="text" id="object" name="object" placeholder="Введіть назву цеху або будівлі" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meter">Тип лічильника *</label>
+                        <input type="text" id="meter" name="meter" placeholder="Наприклад: НІК 2303" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verificationDate">Дата наступної повірки *</label>
+                        <input type="date" id="verificationDate" name="verificationDate" required>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" name="control"> Взяти під особливий контроль
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Зберегти дані</button>
+                        <button type="reset" class="btn btn-secondary">Очистити форму</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="section-container chart-bg">
+            <div class="content-wrapper">
+                <h2>Аналітика та статус повірок</h2>
+                <div class="filters">
+                    <button class="btn btn-filter" onclick="setFilter('all')">Всі точки</button>
+                    <button class="btn btn-filter" onclick="setFilter('expired')">Прострочені</button>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="section-container list-bg">
+            <div class="content-wrapper">
+                <h2>Зареєстровані точки</h2>
+                <div id="list" class="consumers-list">
+                    </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

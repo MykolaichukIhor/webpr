@@ -1,0 +1,270 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #1a73e8;
+            font-size: 2.2rem;
+        }
+
+        section {
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #3c4043;
+        }
+
+        .form-section {
+            background-color: #e8f0fe;
+            border-top: 8px solid #080a0c;
+        }
+
+        .chart-section {
+            background-color: #f8f9fa;
+        }
+
+        .data-section {
+            background-color: #ffffff;
+        }
+
+        .section-divider {
+            border: 0;
+            height: 2px;
+            background: #333;
+            margin: 40px auto;
+            width: 80%;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #202124;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 14px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #fff;
+            display: block;
+            margin: 0 auto;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+
+        .checkbox-group {
+            text-align: center;
+        }
+
+        .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: normal;
+            cursor: pointer;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1765cc;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            border: 1px solid #dadce0;
+            color: #3c4043;
+        }
+
+        .btn-filter {
+            background: #e2e8f0;
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .filters {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .consumers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .consumer-card {
+            border: 1px solid #dadce0;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .consumer-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; 
+        }
+
+        .consumer-field {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .consumer-label {
+            font-weight: 600;
+            color: #5f6368;
+            min-width: 70px;
+            font-size: 0.9rem;
+        }
+
+        .consumer-value {
+            color: #202124;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        .consumer-card.expired { 
+            border-left: 6px solid #d93025; 
+            background: #fdf2f2; 
+        }
+
+        .consumer-card.ok { 
+            border-left: 6px solid #1e8e3e; 
+        }
+
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; 
+            margin-left: auto;
+        }
+
+        .btn-delete, 
+        .btn-edit {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .btn-delete { 
+            background: none;
+            color: #d93025; 
+            border: 1px solid #d93025; 
+        }
+
+        .btn-delete:hover {
+            background: #d93025;
+            color: white;
+        }
+
+        .btn-edit {
+            background: none;
+            color: #1a73e8;
+            border: 1px solid #1a73e8;
+        }
+
+        .btn-edit:hover {
+            background: #1a73e8;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .consumer-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .card-actions {
+                flex-direction: row;
+                justify-content: flex-end;
+                margin-top: 10px;
+            }
+            
+            .consumer-info {
+                gap: 10px;
+            }
+        }
