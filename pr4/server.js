@@ -760,9 +760,9 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log('='.repeat(50));
-    console.log(`🚀 REST API сервер запущено на http://localhost:${PORT}`);
+    console.log(`REST API сервер запущено на http://localhost:${PORT}`);
     console.log('='.repeat(50));
-    console.log('\n📋 Доступні endpoints:');
+    console.log('\n Доступні endpoints:');
     console.log('  GET    /api/capacitor-banks              - список установок');
     console.log('  GET    /api/capacitor-banks/:id          - установка за ID');
     console.log('  GET    /api/capacitor-banks/:id/compensation - дані компенсації');
@@ -774,5 +774,5 @@ app.listen(PORT, () => {
     console.log('  DELETE /api/capacitor-banks/:id          - видалити установку');
     console.log('  GET    /api/stats                        - статистика API');
     console.log('  GET    /api/health                       - стан сервера');
-    console.log('\n📊 Початкові дані завантажено:', capacitorBanks.length, 'установок');
+    console.log('\nПочаткові дані завантажено:', capacitorBanks.length, 'установок');
 });
