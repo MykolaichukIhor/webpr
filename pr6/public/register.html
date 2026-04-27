@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація - Renewable Energy Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Реєстрація</h1>
+        <p class="subtitle">Платформа відновлюваної енергетики</p>
+
+        <div class="error" id="error"></div>
+        <div class="success" id="success"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Ім'я</label>
+                <input type="text" id="name" name="name" required placeholder="Ваше ім'я" minlength="2">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required placeholder="Мінімум 8 символів" minlength="8">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Роль</label>
+                <select id="role" name="role" required>
+                    <option value="">Виберіть роль...</option>
+                    <option value="solar_engineer">☀️ Solar Engineer</option>
+                    <option value="wind_engineer">💨 Wind Engineer</option>
+                    <option value="coordinator">🎯 Coordinator</option>
+                </select>
+            </div>
+
+            <button type="submit">Зареєструватися</button>
+        </form>
+
+        <p class="link">
+            Вже маєте акаунт? <a href="login.html">Увійти</a>
+        </p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

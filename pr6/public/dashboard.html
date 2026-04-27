@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Renewable Energy Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container dashboard-container">
+        <h1>Dashboard</h1>
+        <p class="subtitle">Система управління ВДЕ</p>
+
+        <div class="error" id="error"></div>
+
+        <div class="user-info">
+            <div>
+                <strong id="userName">Завантаження...</strong>
+                <br>
+                <small id="userEmail">...</small>
+            </div>
+            <span class="role-badge" id="userRole">...</span>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="solar">☀️ Solar</button>
+            <button class="tab" data-tab="wind">💨 Wind</button>
+            <button class="tab" data-tab="balance" id="balanceTab" style="display:none;">⚖️ Balance</button>
+        </div>
+
+        <div id="solarSection" class="api-section">
+            <h3>Сонячна генерація</h3>
+            <button id="refreshSolarBtn">Оновити дані</button>
+            <pre id="solarData">Натисніть "Оновити дані"...</pre>
+        </div>
+
+        <div id="windSection" class="api-section" style="display:none;">
+            <h3>Вітрова генерація</h3>
+            <button id="refreshWindBtn">Оновити дані</button>
+            <pre id="windData">Натисніть "Оновити дані"...</pre>
+        </div>
+
+        <div id="balanceSection" class="api-section" style="display:none;">
+            <h3>Балансування генерації</h3>
+            <div class="balance-form">
+                <select id="balanceSource">
+                    <option value="solar">☀️ Solar</option>
+                    <option value="wind">💨 Wind</option>
+                </select>
+                <input type="number" id="balanceAdjustment" placeholder="МВт" step="1">
+                <input type="text" id="balanceReason" placeholder="Причина">
+                <button id="applyBalanceBtn">Застосувати</button>
+            </div>
+            <pre id="balanceResult"></pre>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">Вийти</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід - Renewable Energy Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Вхід</h1>
+        <p class="subtitle">Платформа відновлюваної енергетики</p>
+
+        <div class="error" id="error"></div>
+        <div class="success" id="success"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required placeholder="Ваш пароль">
+            </div>
+
+            <button type="submit">Увійти</button>
+        </form>
+
+        <p class="link">
+            Немає акаунту? <a href="register.html">Зареєструватися</a>
+        </p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
