@@ -1,0 +1,19 @@
+{
+  "name": "geothermal-monitoring-server",
+  "version": "1.0.0",
+  "description": "WebSocket сервер для моніторингу геотермальної станції",
+  "main": "websocket-server.js",
+  "scripts": {
+    "start": "node websocket-server.js",
+    "dev": "nodemon websocket-server.js"
+  },
+  "keywords": ["geothermal", "websocket", "monitoring"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
